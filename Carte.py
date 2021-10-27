@@ -1,9 +1,9 @@
 import random
 
-class ValueException(Exception):
+class ValueException(BaseException):
     pass
 
-class EnsignException(Exception):
+class EnsignException(BaseException):
     pass
 
 class Carte:
@@ -32,9 +32,9 @@ class Carte:
             if valeur not in self.VALEURS_CARTE: raise ValueException
             if enseigne not in self.ENSEIGNES_CARTE: raise EnsignException
         except ValueException:
-            print("Valeur de la carte incorrecte")
+            raise ValueError("Valeur de la carte incorrecte")
         except EnsignException:
-            print("Enseigne de la carte incorrecte")
+            raise ValueError("Enseigne de la carte incorrecte")
         finally:
             self.valeur = valeur
             self.enseigne = enseigne
@@ -46,16 +46,20 @@ class Carte:
         Returns:
             str: {valeur} de {enseigne}
         """
-        print(f"{self.valeur} de {self.enseigne}")
+        return f"{self.valeur} de {self.enseigne}"
+    
+    # def __repr__(self) -> str:
+    #     return self
         
+    @property
     def couleur(self):
         """
         Affiche la couleur de la carte
         """
         if self.enseigne in ["coeur","carreau"]:
-            print("rouge")
-        else
-            print("noir")
+            return "rouge"
+        else:
+            return "noir"
             
             
         
